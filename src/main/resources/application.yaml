@@ -1,0 +1,30 @@
+#Kafka configs
+spring:
+  kafka:
+    bootstrap-servers: [ "localhost:29092", "localhost:29093", "localhost:29094" ]
+    producer:
+      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
+      compression-type: "snappy"
+      batch-size: "32768"
+      acks: "all"
+      properties:
+        enable.idempotence: "true"
+        max.in.flight.requests.per.connection: "5"
+        linger.ms: "20"
+    consumer:
+      key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      value-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      auto-offset-reset: earliest
+      group-id: "input"
+      properties:
+        allow.auto.create.topics: false
+
+#Kafka topics
+kafka-topics:
+  input:
+    name: "input"
+    partitions: 3
+    replication-factor: 2
+  output:
+    name: "output"

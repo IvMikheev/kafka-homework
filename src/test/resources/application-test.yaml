@@ -1,0 +1,6 @@
+kafka:
+  image: "confluentinc/cp-kafka:latest"
+  topic:
+    name: "test"
+    partitions: 1
+    replication-factor: 1
